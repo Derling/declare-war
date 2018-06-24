@@ -1,1 +1,1 @@
-export { default } from './deck.js';
+export { Deck } from './deck.js';
