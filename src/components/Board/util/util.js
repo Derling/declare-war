@@ -11,10 +11,10 @@ const draw = (cb, n=1) => {
 			total.push(currentCard);
 			currentCard = cards.next().value;
 		}
-		return total;
+		return total.length > 1 ? total : total[0];
 }
 
-const HUMAN = "Player";
-const AI = "AI"
+const HUMAN = "playerCards";
+const AI = "aiCards"
 
 export {getImgName, getTitle, draw, HUMAN, AI};
