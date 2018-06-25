@@ -15,11 +15,20 @@ class Board extends Component {
 		this.ai = new AiBrain();
 	}
 
-	placeCard(player, cardIndex, image) {
+	placeCard(player, cardIndex) {
 		// send card that gets played to Actions component and display image
 		let cards = this.state[player];
+		let cardPlayed = cards[cardIndex];
 		cards[cardIndex] = draw(this.props.draw);
 		this.setState({[player]: cards});
+		if(player === HUMAN) {
+			setTimeout(() => this.aiTurn(cardPlayed), 5000);
+		}
+	}
+
+	aiTurn(target){
+		let move = this.ai.makeMove(this.state.aiCards, target);
+		this.placeCard(AI, move);
 	}
 
 	componentWillMount() {
@@ -32,8 +41,7 @@ class Board extends Component {
 		return (
 			<div>
 				<Player placeCard={this.placeCard}
-					playerType={AI}
-					turn={!this.props.pTurn}  
+					playerType={AI} 
 					cards={this.state.aiCards}/>
 				<Player placeCard={this.placeCard}
 					playerType={HUMAN}

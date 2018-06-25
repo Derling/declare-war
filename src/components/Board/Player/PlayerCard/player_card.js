@@ -11,8 +11,8 @@ class PlayerCard extends PureComponent {
 		this.handleClick = this.handleClick.bind(this);
 	}
 
-	handleClick(imgSrc) {
-		this.props.playCard(this.props.cardIndex, imgSrc);
+	handleClick() {
+		this.props.playCard(this.props.cardIndex);
 	}
 
 	render() {
@@ -21,9 +21,8 @@ class PlayerCard extends PureComponent {
 		}
 		let card = this.props.card;
 		let imgName = getImgName(card);
-		let title = getTitle(card);
-		let imgSrc = this.props.cardType === HUMAN ?  CARDS[imgName]:
-			CARDS.card_back;
+		let title = this.props.cardType === HUMAN ? getTitle(card) : null;
+		let imgSrc = this.props.cardType === HUMAN ?  CARDS[imgName]: CARDS.card_back;
 		let onClickHandler = this.props.cardType === HUMAN ? this.handleClick : null
 		return (
 			<div className="card-wrapper" title={title} 

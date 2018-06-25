@@ -8,12 +8,11 @@ class Player extends Component {
 		this.makeMove = this.makeMove.bind(this);
 	}
 
-	makeMove(cardIndex, imgSrc) {
+	makeMove(cardIndex) {
 		if(this.props.turn) {
 			this.props.placeCard(
 				this.props.playerType, 
-				cardIndex, 
-				imgSrc
+				cardIndex,
 			);
 		}
 	}
