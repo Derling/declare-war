@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+//import {Actions} from './Actions';
 import {Player} from './Player';
-import {draw, HUMAN, AI} from './util';
+import {draw, HUMAN, AI, AiBrain} from './util';
 
 class Board extends Component {
 
@@ -11,20 +12,14 @@ class Board extends Component {
 			playerCards: [],
 			aiCards: [],
 		}
+		this.ai = new AiBrain();
 	}
 
 	placeCard(player, cardIndex, image) {
 		// send card that gets played to Actions component and display image
-		if(player === HUMAN) {
-			let playerCards = this.state.playerCards
-			playerCards[cardIndex] = draw(this.props.draw)[0];
-			this.setState({playerCards});
-		}
-		else {
-			let aiCards = this.state.aiCards;
-			aiCards[cardIndex] = draw(this.props.draw)[0];
-			this.setState({aiCards});
-		}
+		let cards = this.state[player];
+		cards[cardIndex] = draw(this.props.draw);
+		this.setState({[player]: cards});
 	}
 
 	componentWillMount() {
@@ -38,7 +33,7 @@ class Board extends Component {
 			<div>
 				<Player placeCard={this.placeCard}
 					playerType={AI}
-					turn={this.props.pTurn}  
+					turn={!this.props.pTurn}  
 					cards={this.state.aiCards}/>
 				<Player placeCard={this.placeCard}
 					playerType={HUMAN}
