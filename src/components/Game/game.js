@@ -13,7 +13,7 @@ class Game extends Component {
 		this.drawCards = this.drawCards.bind(this);
 		this.state = {
 			playerTurn: false,
-			deck: shuffleCards(buildCards(Card)),
+			deck: shuffleCards(buildCards(Card))
 		}
 	}
 
