@@ -1,0 +1,7 @@
+.card {
+	width: 150px;
+}
+
+.card-wrapper {
+	display: inline-block;
+}
