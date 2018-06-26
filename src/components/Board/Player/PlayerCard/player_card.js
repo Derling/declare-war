@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {getImgName, getTitle, getImgSrc, HUMAN, CARDBACK} from '../../util';
+import {getTitle, getImgSrc, HUMAN, CARDBACK} from '../../util';
 
 import './style.css';
 
@@ -19,14 +19,13 @@ class PlayerCard extends PureComponent {
 			return null;
 		}
 		let card = this.props.card;
-		let imgName = getImgName(card);
 		let title = this.props.cardType === HUMAN ? getTitle(card) : null;
 		let imgSrc = this.props.cardType === HUMAN ?  getImgSrc(card) : CARDBACK;
 		let onClickHandler = this.props.cardType === HUMAN ? this.handleClick : null;
 		return (
 			<div className="card-wrapper" title={title} 
 				onClick={onClickHandler}>
-				<img className="card" src={imgSrc} alt={imgName}/>
+				<img className="card" src={imgSrc} alt={title}/>
 			</div>
 		);
 	}

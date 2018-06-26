@@ -1,15 +1,38 @@
+const getMax = values => {
+	let index = 0;
+	let max = 0;
+	while(index < values.length) {
+		if(values[index] > values[max]) {
+			max = index;
+		}
+		index++;
+	}
+	console.log(values[max], max);
+	return [values[max], max];
+}
+
+const getMin = values => {
+	let index = 0;
+	let min = 0;
+	while(index < values.length) {
+		if(values[index] < values[min]) {
+			min = index;
+		}
+		index++;
+	}
+	return min;
+}
+
+
 class AiBrain {
 	makeMove(cards, against) {
-		if(cards.length === 1){
-			return 0;
+		let cardValues = cards.filter(card => card).map(card => card.getValue());
+		let [maxValue, index] = getMax(cardValues);
+		let oppValue = against ? against.getValue() : null;
+		if(!oppValue || maxValue > oppValue) {
+			return index;
 		}
-		let oppValue = against.getValue();
-		let cardValues = cards.map(card => card.getValue());
-		let max = Math.max(...cardValues);
-		if(max > oppValue){
-			return cardValues.indexOf(max);
-		}
-		return cardValues.indexOf(Math.min(...cardValues));
+		return getMin(cardValues);
 	}
 }
 

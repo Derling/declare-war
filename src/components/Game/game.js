@@ -17,14 +17,17 @@ class Game extends Component {
 		}
 	}
 
-	*drawCards(cards=1) {
+	drawCards(cards=1) {
 		if(this.state.deck.length) {
+			let drawnCards = []
 			while (cards--) {
 				let nextCard = this.state.deck.pop();
-				yield nextCard;
+				drawnCards.push(nextCard);
 			}
 			this.setState({deck: this.state.deck, playerTurn: !this.state.playerTurn})
+			return drawnCards
 		}
+		return [null];
 	}
 
 	render() {
