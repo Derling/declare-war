@@ -9,8 +9,6 @@ class Board extends Component {
 		super(props);
 		this.placeCard = this.placeCard.bind(this);
 		this.state = {
-			playerCards: this.props.draw(4),
-			aiCards: this.props.draw(4),
 			actions: [],
 		}
 		this.ai = new AiBrain();
@@ -22,23 +20,18 @@ class Board extends Component {
 	}
 
 	placeCard(player, cardIndex) {
-		let cards = this.state[player];
+		let cards = this.props[player];
 		let lastPlayed = cards[cardIndex];
-
-		let [newCard] = this.props.draw();
-		cards[cardIndex] = newCard;
-
 		let actions = this.updateActions(lastPlayed);
-		this.setState({[player]: cards, actions});
-		
-
+		this.props.draw(player, cardIndex);
+		this.setState({actions});
 		if(player === HUMAN) {
-			setTimeout(() => this.aiTurn(lastPlayed), 5000);
+			setTimeout(() => this.aiTurn(lastPlayed), 2000);
 		}
 	}
 
 	aiTurn(against=null){
-		let move = this.ai.makeMove(this.state.aiCards, against);
+		let move = this.ai.makeMove(this.props.aiCards, against);
 		this.placeCard(AI, move);
 	}
 
@@ -47,13 +40,13 @@ class Board extends Component {
 			<div>
 				<Player placeCard={this.placeCard}
 					playerType={AI} 
-					cards={this.state.aiCards}/>
+					cards={this.props.aiCards}/>
 				<Actions actions={this.state.actions}
 					pTurn={this.props.pTurn}/>
 				<Player placeCard={this.placeCard}
 					playerType={HUMAN}
 					turn={this.props.pTurn}  
-					cards={this.state.playerCards}/>
+					cards={this.props.playerCards}/>
 			</div>
 		);
 	}

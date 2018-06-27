@@ -11,10 +11,19 @@ class Game extends Component {
 	constructor() {
 		super();
 		this.drawCards = this.drawCards.bind(this);
+		this.drawSingleCard = this.drawSingleCard.bind(this);
 		this.state = {
 			playerTurn: false,
-			deck: shuffleCards(buildCards(Card))
+			deck: [],
+			playerCards: [],
+			aiCards: []
 		}
+	}
+
+	componentWillMount() {
+		// build deck then draw 4 cards for ai and human
+		this.setState({ deck: shuffleCards(buildCards(Card))}, () => this.setState({
+			playerCards: this.drawCards(4), aiCards: this.drawCards(4)}));
 	}
 
 	drawCards(cards=1) {
@@ -30,11 +39,26 @@ class Game extends Component {
 		return [null];
 	}
 
+	drawSingleCard(player, index) {
+		let cards = this.state[player];
+		let [newCard] = this.drawCards()
+		cards[index] = newCard;
+		this.setState({player: cards});
+	}
+
 	render() {
+		console.log(this.state);
+		let state = this.state;
+		let deck = state.deck;
+		let aiCards = state.aiCards;
+		let playerCards = state.playerCards;
 		return (
 			<div>
-				<Deck deck={this.state.deck}/>
-				<Board pTurn={this.state.playerTurn} draw={this.drawCards} />
+				<Deck deck={deck}/>
+				<Board pTurn={state.playerTurn} 
+					draw={this.drawSingleCard} 
+					aiCards={aiCards}
+					playerCards={playerCards}/>
 			</div>
 
 		);
