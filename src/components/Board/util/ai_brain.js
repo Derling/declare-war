@@ -7,7 +7,6 @@ const getMax = values => {
 		}
 		index++;
 	}
-	console.log(values[max], max);
 	return [values[max], max];
 }
 
@@ -25,7 +24,7 @@ const getMin = values => {
 
 
 class AiBrain {
-	makeMove(cards, against) {
+	makeMove(cards, against=null) {
 		let cardValues = cards.filter(card => card).map(card => card.getValue());
 		let [maxValue, index] = getMax(cardValues);
 		let oppValue = against ? against.getValue() : null;
