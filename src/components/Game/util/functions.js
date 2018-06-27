@@ -1,6 +1,6 @@
 const buildCards = cardObj => {
 	let RANKS = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"];
-	let SUITS = ["clubs", "diamonds", "hearts", "spades"];
+	let SUITS = ["clubs", "hearts", "diamonds", "spades"];
 	let cards = [];
 	for(let i=0; i < RANKS.length;i++) {
 		for(let j=0; j < SUITS.length; j++) {
