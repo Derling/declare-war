@@ -1,0 +1,1 @@
+export {FlashMessage} from './flash_message.js';
