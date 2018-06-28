@@ -10,14 +10,21 @@ class Game extends Component {
 
 	constructor() {
 		super();
-		this.drawCards = this.drawCards.bind(this);
-		this.drawSingleCard = this.drawSingleCard.bind(this);
+		this.playTurn = this.playTurn.bind(this);
+		this.updateScore = this.updateScore.bind(this);
 		this.state = {
 			playerTurn: true,
+			playerScore: 0,
+			aiScore: 0,
 			deck: [],
 			playerCards: [],
 			aiCards: [],
 		}
+	}
+
+	updateScore(player, score) {
+		let newScore = this.state[player] + score;
+		this.setState({[player]: newScore});
 	}
 
 	componentWillMount() {
@@ -38,7 +45,7 @@ class Game extends Component {
 		return [null];
 	}
 
-	drawSingleCard(player, index) {
+	playTurn(player, index) {
 		let cards = this.state[player];
 		let playerTurn = !this.state.playerTurn;
 		let [newCard] = this.drawCards();
@@ -55,9 +62,10 @@ class Game extends Component {
 			<div>
 				<Deck deck={deck}/>
 				<Board pTurn={state.playerTurn} 
-					draw={this.drawSingleCard} 
+					draw={this.playTurn} 
 					aiCards={aiCards}
-					playerCards={playerCards}/>
+					playerCards={playerCards}
+					updateScore={this.updateScore}/>
 			</div>
 
 		);

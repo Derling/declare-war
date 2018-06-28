@@ -1,30 +1,44 @@
 import React, { Component } from 'react';
 import {Actions} from './Actions';
 import {Player} from './Player';
-import {HUMAN, AI, AiBrain} from './util';
+import {HUMAN, AI, AiBrain, HUMANCARD, AICARD} from './util';
 
 class Board extends Component {
 
 	constructor(props) {
 		super(props);
-		this.placeCard = this.placeCard.bind(this);
+		this.playCard = this.playCard.bind(this);
 		this.state = {
 			actions: [],
 		}
 		this.ai = new AiBrain();
 	}
 
-	updateActions(newAction) {
+	updateActions(cardOwner, newAction) {
 		return this.state.actions.length === 2 ?
-			[newAction] : this.state.actions.concat([newAction])
+			[{player: cardOwner, card: newAction}] : 
+			this.state.actions.concat([{player: cardOwner, card: newAction}])
 	}
 
-	placeCard(player, cardIndex) {
+	validateActions() {
+		if(this.state.actions.length === 2) {
+			let actions = this.state.actions;
+			let [playerValue, aiValue] = [actions[0].card.getValue(), actions[1].card.getValue()];
+			if(aiValue > playerValue) {
+				this.props.updateScore(AICARD, aiValue - playerValue);
+			}
+			else {
+				this.props.updateScore(HUMANCARD, playerValue - aiValue);
+			}
+		}
+	}
+
+	playCard(player, cardOwner, cardIndex) {
 		let cards = this.props[player];
 		let lastPlayed = cards[cardIndex];
-		let actions = this.updateActions(lastPlayed);
+		let actions = this.updateActions(cardOwner, lastPlayed);
 		this.props.draw(player, cardIndex);
-		this.setState({actions});
+		this.setState({actions}, this.validateActions);
 		if(player === HUMAN) {
 			setTimeout(() => this.aiTurn(lastPlayed), 1000);
 		}
@@ -32,7 +46,7 @@ class Board extends Component {
 
 	aiTurn(against=null){
 		let move = this.ai.makeMove(this.props.aiCards, against);
-		this.placeCard(AI, move);
+		this.playCard(AI, AICARD, move);
 	}
 
 	render() {
@@ -43,7 +57,7 @@ class Board extends Component {
 					cards={this.props.aiCards}/>
 				<Actions actions={this.state.actions}
 					pTurn={this.props.pTurn}/>
-				<Player placeCard={this.placeCard}
+				<Player placeCard={this.playCard}
 					playerType={HUMAN}
 					turn={this.props.pTurn}  
 					cards={this.props.playerCards}/>

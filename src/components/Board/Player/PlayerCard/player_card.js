@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {getTitle, getImgSrc, HUMAN, CARDBACK} from '../../util';
+import {HUMAN, HUMANCARD} from '../../util';
 
 import './style.css';
 
@@ -11,7 +11,7 @@ class PlayerCard extends PureComponent {
 	}
 
 	handleClick() {
-		this.props.playCard(this.props.cardIndex);
+		this.props.playCard(HUMANCARD, this.props.cardIndex);
 	}
 
 	render() {
@@ -19,11 +19,11 @@ class PlayerCard extends PureComponent {
 			return null;
 		}
 		let card = this.props.card;
-		let title = this.props.cardType === HUMAN ? getTitle(card) : null;
-		let imgSrc = this.props.cardType === HUMAN ?  getImgSrc(card) : CARDBACK;
+		let title = this.props.cardType === HUMAN ? card.getTitle() : null;
+		let imgSrc = this.props.cardType === HUMAN ?  card.getImg() : card.getCardBack();
 		let onClickHandler = this.props.cardType === HUMAN ? this.handleClick : null;
 		return (
-			<div className="card-wrapper" title={title} 
+			<div className="card-wrapper" title={card.getTitle()} 
 				onClick={onClickHandler}>
 				<img className="card" src={imgSrc} alt={title}/>
 			</div>

@@ -8,10 +8,11 @@ class Player extends Component {
 		this.makeMove = this.makeMove.bind(this);
 	}
 
-	makeMove(cardIndex) {
+	makeMove(cardOwner, cardIndex) {
 		if(this.props.turn) {
 			this.props.placeCard(
-				this.props.playerType, 
+				this.props.playerType,
+				cardOwner,
 				cardIndex,
 			);
 		}

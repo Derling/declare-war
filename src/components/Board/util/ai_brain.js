@@ -1,3 +1,9 @@
+// Ai "brain" that makes moves against opponent moves
+// ai looks at the card that was played by the player
+// it checks its value then determines if it has a card with a higher value
+// if it has a card with a higher value, return the index of that card
+// if not return the card with the lowest value so mitigate the number of points that get lost
+
 const getMax = values => {
 	let index = 0;
 	let max = 0;

@@ -5,11 +5,8 @@ import {FlashMessage} from './FlashMessage';
 class Actions extends PureComponent {
 
 	render() {
-		if(!this.props.actions.length){
-			return null;
-		}
-		let elements = this.props.actions.map((card, index) => 
-			<ActionsCard card={card} key={index} />
+		let elements = this.props.actions.map((action, index) => 
+			<ActionsCard card={action.card} key={index} />
 		);
 		return(
 			<div>

@@ -1,4 +1,4 @@
-import {RANK_VALUES, SUIT_VALUES} from './util';
+import {RANK_VALUES, SUIT_VALUES, getImgSrc, getTitle, getCardBack} from './util';
 
 class Card {
 	
@@ -9,6 +9,18 @@ class Card {
 
 	getValue() {
 		return RANK_VALUES[this.rank] + SUIT_VALUES[this.suit]
+	}
+
+	getImg() {
+		return getImgSrc(this);
+	}
+
+	getTitle() {
+		return getTitle(this);
+	}
+
+	getCardBack() {
+		return getCardBack();
 	}
 
 }
