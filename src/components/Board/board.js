@@ -26,7 +26,7 @@ class Board extends Component {
 		this.props.draw(player, cardIndex);
 		this.setState({actions});
 		if(player === HUMAN) {
-			setTimeout(() => this.aiTurn(lastPlayed), 2000);
+			setTimeout(() => this.aiTurn(lastPlayed), 1000);
 		}
 	}
 

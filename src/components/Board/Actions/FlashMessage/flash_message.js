@@ -16,7 +16,7 @@ class FlashMessage extends Component {
 		let classes = this.state;
 		let msg = this.props.turn ? PTURNMSG : AITURNMSG;
 		return (
-			<div className={this.props.turn ? classes.player : classes.ai}>
+			<div style={{float: "right"}}className={this.props.turn ? classes.player : classes.ai}>
 				{msg}
 			</div>
 		);
