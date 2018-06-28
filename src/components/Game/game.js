@@ -34,8 +34,9 @@ class Game extends Component {
 				drawnCards.push(nextCard);
 			}
 			this.setState({deck: this.state.deck, playerTurn: !this.state.playerTurn})
-			return drawnCards
+			return drawnCards;
 		}
+		this.setState({playerTurn: !this.state.playerTurn});
 		return [null];
 	}
 
@@ -47,7 +48,6 @@ class Game extends Component {
 	}
 
 	render() {
-		console.log(this.state);
 		let state = this.state;
 		let deck = state.deck;
 		let aiCards = state.aiCards;
