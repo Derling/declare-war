@@ -13,10 +13,10 @@ class Game extends Component {
 		this.drawCards = this.drawCards.bind(this);
 		this.drawSingleCard = this.drawSingleCard.bind(this);
 		this.state = {
-			playerTurn: false,
+			playerTurn: true,
 			deck: [],
 			playerCards: [],
-			aiCards: []
+			aiCards: [],
 		}
 	}
 
@@ -33,18 +33,17 @@ class Game extends Component {
 				let nextCard = this.state.deck.pop();
 				drawnCards.push(nextCard);
 			}
-			this.setState({deck: this.state.deck, playerTurn: !this.state.playerTurn})
 			return drawnCards;
 		}
-		this.setState({playerTurn: !this.state.playerTurn});
 		return [null];
 	}
 
 	drawSingleCard(player, index) {
 		let cards = this.state[player];
-		let [newCard] = this.drawCards()
+		let playerTurn = !this.state.playerTurn;
+		let [newCard] = this.drawCards();
 		cards[index] = newCard;
-		this.setState({player: cards});
+		this.setState({deck: this.state.deck, playerTurn, player: cards})
 	}
 
 	render() {
