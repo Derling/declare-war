@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {HUMAN, AI} from '../util';
+import {HUMAN} from '../util';
 
 const PLAYERSCORE = "Your Score"
 const AISCORE = "Opponent Score"
