@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Deck} from '../Deck';
 import {Card} from './card.js';
 import {Board} from '../Board';
 
@@ -55,13 +54,12 @@ class Game extends Component {
 
 	render() {
 		let state = this.state;
-		let deck = state.deck;
 		let aiCards = state.aiCards;
 		let playerCards = state.playerCards;
+		let pTurn = state.playerTurn;
 		return (
 			<div>
-				<Deck deck={deck}/>
-				<Board pTurn={state.playerTurn} 
+				<Board pTurn={pTurn} 
 					draw={this.playTurn} 
 					aiCards={aiCards}
 					playerCards={playerCards}
