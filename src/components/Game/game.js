@@ -13,6 +13,7 @@ class Game extends Component {
 		this.updateScore = this.updateScore.bind(this);
 		this.state = {
 			playerTurn: true,
+			playerWinning: true,
 			playerScore: 0,
 			aiScore: 0,
 			deck: [],
@@ -21,9 +22,19 @@ class Game extends Component {
 		}
 	}
 
+	checkWinner() {
+		let [pScore, aiScore] = [this.state.playerScore, this.state.aiScore];
+		if(pScore > aiScore && !this.state.playerWinnig) {
+			this.setState({playerWinning: true});
+		}
+		else if(pScore < aiScore && !this.state.playerWinnig) {
+			this.setState({playerWinning: false});	
+		}
+	}
+
 	updateScore(player, score) {
 		let newScore = this.state[player] + score;
-		this.setState({[player]: newScore});
+		this.setState({[player]: newScore}, this.checkWinner);
 	}
 
 	componentWillMount() {
@@ -57,9 +68,12 @@ class Game extends Component {
 		let aiCards = state.aiCards;
 		let playerCards = state.playerCards;
 		let pTurn = state.playerTurn;
+		let scores = {ai: state.aiScore, player: state.playerScore};
 		return (
 			<div>
-				<Board pTurn={pTurn} 
+				<Board pTurn={pTurn}
+					scores={scores}
+					winning={state.playerWinning} 
 					draw={this.playTurn} 
 					aiCards={aiCards}
 					playerCards={playerCards}

@@ -1,4 +1,4 @@
 const PTURNMSG = "It is your turn";
-const AITURNMSG = "The computer is making a move...";
+const AITURNMSG = "Your opponent is making a move";
 
 export {PTURNMSG, AITURNMSG};
