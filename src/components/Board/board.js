@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import {Actions} from './Actions';
 import {Player} from './Player';
 import {Score} from './Score';
+
+import './style.css';
 import {HUMAN, AI, AiBrain, HUMANCARD, AICARD} from './util';
+
 
 class Board extends Component {
 
@@ -52,22 +55,21 @@ class Board extends Component {
 
 	render() {
 		let gameData = this.props;
-		console.log(gameData);
 		return (
-			<div>
+			<div className="game-board">
 				<Player placeCard={this.placeCard}
 					playerType={AI}
-					winning={!gameData.winning}
 					cards={gameData.aiCards}/>
 				<Score player={AI}
+					winning={!gameData.winning}
 					score={gameData.scores.ai}/>
 				<Actions actions={this.state.actions}
 					pTurn={gameData.pTurn}/>
 				<Score player={HUMAN}
+					winning={gameData.winning}
 					score={gameData.scores.player}/>
 				<Player placeCard={this.playCard}
 					playerType={HUMAN}
-					winning={gameData.winning}
 					turn={gameData.pTurn}  
 					cards={gameData.playerCards}/>
 			</div>

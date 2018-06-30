@@ -9,8 +9,8 @@ class ActionsCard extends PureComponent {
 		let title = card.getTitle();
 		let imgSrc = card.getImg();
 		return(
-			<div style={{display:"inline-block"}} title={title}>
-				<img src={imgSrc} alt={title} />
+			<div className="card-wrapper" title={title}>
+				<img className="card" src={imgSrc} alt={title} />
 			</div>
 		);
 	}

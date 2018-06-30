@@ -23,7 +23,7 @@ class PlayerCard extends PureComponent {
 		let imgSrc = this.props.cardType === HUMAN ?  card.getImg() : card.getCardBack();
 		let onClickHandler = this.props.cardType === HUMAN ? this.handleClick : null;
 		return (
-			<div className="card-wrapper" title={card.getTitle()} 
+			<div className="card-wrapper" title={title} 
 				onClick={onClickHandler}>
 				<img className="card" src={imgSrc} alt={title}/>
 			</div>

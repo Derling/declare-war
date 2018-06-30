@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Card} from './card.js';
 import {Board} from '../Board';
 
-
+import './style.css';
 import {buildCards, shuffleCards} from './util';
 
 class Game extends Component {
@@ -57,21 +57,24 @@ class Game extends Component {
 
 	playTurn(player, index) {
 		let cards = this.state[player];
+		let turns = this.state.turns + 1;
 		let playerTurn = !this.state.playerTurn;
 		let [newCard] = this.drawCards();
 		cards[index] = newCard;
-		this.setState({deck: this.state.deck, playerTurn, player: cards})
+		this.setState({deck: this.state.deck, turns, playerTurn, player: cards})
 	}
 
 	render() {
 		let state = this.state;
+		console.log(state.turns, state.playerTurn);
 		let aiCards = state.aiCards;
 		let playerCards = state.playerCards;
 		let pTurn = state.playerTurn;
 		let scores = {ai: state.aiScore, player: state.playerScore};
 		return (
-			<div>
+			<div className="game">
 				<Board pTurn={pTurn}
+					turns={state.turns}
 					scores={scores}
 					winning={state.playerWinning} 
 					draw={this.playTurn} 
