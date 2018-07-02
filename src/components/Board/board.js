@@ -55,23 +55,28 @@ class Board extends Component {
 
 	render() {
 		let gameData = this.props;
+		let pTurn = gameData.pTurn
+		let pCards = gameData.playerCards;
+		let aiCards = gameData.aiCards;
+		let pWinning = gameData.winning;
+		let scores = gameData.scores;
 		return (
 			<div className="game-board">
 				<Player placeCard={this.placeCard}
 					playerType={AI}
-					cards={gameData.aiCards}/>
+					cards={aiCards}/>
 				<Score player={AI}
-					winning={!gameData.winning}
-					score={gameData.scores.ai}/>
+					winning={!pWinning}
+					score={scores.ai}/>
 				<Actions actions={this.state.actions}
-					pTurn={gameData.pTurn}/>
+					pTurn={pTurn}/>
 				<Score player={HUMAN}
-					winning={gameData.winning}
-					score={gameData.scores.player}/>
+					winning={pWinning}
+					score={scores.player}/>
 				<Player placeCard={this.playCard}
 					playerType={HUMAN}
-					turn={gameData.pTurn}  
-					cards={gameData.playerCards}/>
+					turn={pTurn}  
+					cards={pCards}/>
 			</div>
 		);
 	}

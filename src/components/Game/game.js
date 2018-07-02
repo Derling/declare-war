@@ -12,6 +12,7 @@ class Game extends Component {
 		this.playTurn = this.playTurn.bind(this);
 		this.updateScore = this.updateScore.bind(this);
 		this.state = {
+			gameOver: false,
 			playerTurn: true,
 			playerWinning: true,
 			playerScore: 0,
@@ -25,10 +26,17 @@ class Game extends Component {
 	checkWinner() {
 		let [pScore, aiScore] = [this.state.playerScore, this.state.aiScore];
 		if(pScore > aiScore && !this.state.playerWinnig) {
-			this.setState({playerWinning: true});
+			this.setState({playerWinning: true}, this.checkGameOver);
 		}
 		else if(pScore < aiScore && !this.state.playerWinnig) {
-			this.setState({playerWinning: false});	
+			this.setState({playerWinning: false}, this.checkGameOver);
+		}
+	}
+
+	checkGameOver() {
+		if(!this.state.aiCards.filter(card => card).length &&
+			!this.state.playerCards.filter(card => card).length) {
+			this.setState({gameOver: true});
 		}
 	}
 
@@ -65,22 +73,22 @@ class Game extends Component {
 	}
 
 	render() {
+		// add component for when the game is over
 		let state = this.state;
-		console.log(state.turns, state.playerTurn);
 		let aiCards = state.aiCards;
 		let playerCards = state.playerCards;
 		let pTurn = state.playerTurn;
 		let scores = {ai: state.aiScore, player: state.playerScore};
+		let pWinning = state.playerWinning;
 		return (
 			<div className="game">
-				<Board pTurn={pTurn}
-					turns={state.turns}
+				<Board draw={this.playTurn}
+					updateScore={this.updateScore}
+					pTurn={pTurn}
 					scores={scores}
-					winning={state.playerWinning} 
-					draw={this.playTurn} 
+					winning={pWinning}
 					aiCards={aiCards}
-					playerCards={playerCards}
-					updateScore={this.updateScore}/>
+					playerCards={playerCards}/>
 			</div>
 
 		);
