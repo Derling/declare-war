@@ -4,7 +4,7 @@ import {Player} from './Player';
 import {Score} from './Score';
 
 import './style.css';
-import {HUMAN, AI, AiBrain, HUMANCARD, AICARD} from './util';
+import {HUMAN, AI, AiBrain, HUMANCARD, AICARD, GameOverMsg} from './util';
 
 
 class Board extends Component {
@@ -54,12 +54,20 @@ class Board extends Component {
 	}
 
 	render() {
+		if(this.props.gameOver) {
+			return (
+				<GameOverMsg aiScore={this.props.scores.ai}
+					pScore={this.props.scores.player}
+					pWin={this.props.winning}/>
+			);
+		}
 		let gameData = this.props;
 		let pTurn = gameData.pTurn
 		let pCards = gameData.playerCards;
 		let aiCards = gameData.aiCards;
 		let pWinning = gameData.winning;
 		let scores = gameData.scores;
+		let cardsLeft = gameData.deck;
 		return (
 			<div className="game-board">
 				<Player placeCard={this.placeCard}
@@ -69,7 +77,8 @@ class Board extends Component {
 					winning={!pWinning}
 					score={scores.ai}/>
 				<Actions actions={this.state.actions}
-					pTurn={pTurn}/>
+					pTurn={pTurn}
+					cards={cardsLeft}/>
 				<Score player={HUMAN}
 					winning={pWinning}
 					score={scores.player}/>
