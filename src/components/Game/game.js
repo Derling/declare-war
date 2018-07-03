@@ -80,14 +80,18 @@ class Game extends Component {
 		let pTurn = state.playerTurn;
 		let scores = {ai: state.aiScore, player: state.playerScore};
 		let pWinning = state.playerWinning;
+		let gameStatus = state.gameOver;
+		let deck = state.deck.length;
 		return (
 			<div className="game">
 				<Board draw={this.playTurn}
 					updateScore={this.updateScore}
+					gameOver={gameStatus}
 					pTurn={pTurn}
 					scores={scores}
 					winning={pWinning}
 					aiCards={aiCards}
+					deck={deck}
 					playerCards={playerCards}/>
 			</div>
 
