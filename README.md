@@ -15,4 +15,4 @@ Here is a screenshot of what the game can look like at one point.
 ![alt text](https://github.com/Derling/declare-war/blob/master/screenshot.png "screenshot of game")
 
 #### Additional Notes
-Although I am contempt with the state of the project there are some additional features that I would like to implement when I have the time. They can be viewed [here](https://github.com/Derling/declare-war/blob/master/missing-features.md "list of missing features")
+Although I am contempt with the state of the project there are some additional features that I would like to implement when I have the time. They can be viewed [here](https://github.com/Derling/declare-war/blob/master/missing-features.md "list of missing features").
