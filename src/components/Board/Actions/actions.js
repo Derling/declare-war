@@ -8,7 +8,6 @@ class Actions extends PureComponent {
 		if(!this.props.actions.length) {
 			return null;
 		}
-		console.log(this.props);
 		let elements = this.props.actions.map((action, index) => 
 			<ActionsCard card={action.card} key={index} />
 		);

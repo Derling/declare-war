@@ -25,7 +25,7 @@ class Board extends Component {
 	}
 
 	validateActions() {
-		if(this.state.actions.length === 2) {
+		if(this.state.actions.filter(action => action.card).length === 2) {
 			let actions = this.state.actions;
 			let [playerValue, aiValue] = [actions[0].card.getValue(), actions[1].card.getValue()];
 			if(aiValue > playerValue) {
