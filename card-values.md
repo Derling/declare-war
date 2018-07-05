@@ -12,7 +12,7 @@ Ace|♠️|3|Ace of Spades
 2|♥️|3|Two of Hearts
 2|♠️|4|Two of Spades
 3|♣️|2|Three of Clubs
-🃃|3|♦️|3|Three of Diamonds
+3|♦️|3|Three of Diamonds
 3|♥️|4|Three of Hearts
 3|♠️|5|Three of Spades
 4|♣️|3|Four of Clubs
